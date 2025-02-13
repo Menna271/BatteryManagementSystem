@@ -1,0 +1,71 @@
+@startuml Component Diagram
+
+package "Energy Management System" {
+    package "System Variables" {
+        [CPVPanel] 
+        [CHouse] 
+    }
+        package "System Responders" {
+        [CEnergyContext] ..> [CStorageSystem] : "requires"
+        [CEnergyContext] ..> [CGrid] : "requires"
+    }
+
+    package "Notifications" {
+        [IObservable]
+        [IObserver]
+    }
+
+    package "Storage Components" {
+        [IController]
+        [IInverter]
+        [IBattery]
+    }
+
+    package "Vendors" {
+        [CVendorABattery]
+        [CVendorBInverter]
+        [CVendorXController]
+    }
+
+    package "Adapters" {
+        [CVendorABatteryAdapter]
+        [CVendorBInverterAdapter]
+        [CVendorXControllerAdapter]
+    }
+
+    package "Strategy" {
+        [CSupplyFromPVStrategy]
+        [CSupplyFromStorageStrategy]
+    }
+
+    [CPVPanel] --|> [IObservable] : "implements"
+    [CHouse] --|> [IObservable] : "implements"
+
+    [IObservable] --> [IObserver] : "notifies"
+
+    [CEnergyContext] --|> [IEnergyContext] : "implements"
+    [IEnergyContext] --|> [IObservable] : "inherits"
+    [CEnergyContext] --|> [IObserver] : "implements"
+
+    [CStorageSystem] *-- [IController] : "owns"
+    [CStorageSystem] *-- [IInverter] : "owns"
+    [CStorageSystem] *-- [IBattery] : "owns"
+    [CStorageSystem] ..> [CStorageFactory] : "uses"
+
+    [CVendorABatteryAdapter] ..> [CVendorABattery] : "uses"
+    [CVendorABatteryAdapter] --|> [IBattery] : "implements"
+
+    [CVendorBInverterAdapter] ..> [CVendorBInverter] : "uses"
+    [CVendorBInverterAdapter] --|> [IInverter] : "implements"
+
+    [CVendorXControllerAdapter] ..> [CVendorXController] : "uses"
+    [CVendorXControllerAdapter] --|> [IController] : "implements"
+
+    [CSupplyFromPVStrategy] --|> [IEnergyStrategy] : "implements"
+    [CSupplyFromStorageStrategy] --|> [IEnergyStrategy] : "implements"
+
+    [CVendorXController] *-- [IEnergyStrategy] : "owns"
+
+}
+
+@enduml

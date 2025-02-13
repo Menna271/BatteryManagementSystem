@@ -1,0 +1,353 @@
+@startuml Class Diagram
+
+class CEnergyContext {
+    +CEnergyContext(storage: std::shared_ptr<CStorageSystem>, grid: std::shared_ptr<CGrid>)
+    +onUpdate(source: IObservable*, field: string, value: double): void
+    +getPVPower(): double
+    +getHouseConsumption(): double
+    +requestCharge(power: double): void
+    +requestDischarge(power: double): void
+    +getMaxCharge(): double
+    +getMaxDischarge(): double
+    +isBatteryFull(): bool
+    +isBatteryLow(): bool
+    +sellToGrid(power: double): void
+    +buyFromGrid(power: double): void
+    +registerObserver(obs: std::shared_ptr<IObserver>): void
+    +removeObserver(obs: std::shared_ptr<IObserver>): void
+    +notifyObservers(field: string, newValue: double): void
+    --
+    - m_Values: std::unordered_map<string, double> = {{"pv.power", 0.0}, {"house.power", 0.0}}
+    - m_Observers: std::vector<std::weak_ptr<IObserver>>
+    - m_Storage: std::shared_ptr<CStorageSystem>
+    - m_Grid: std::shared_ptr<CGrid>
+}
+
+class CGrid {
+    +CGrid()
+    +updateValues(power: double, volt: double, freq: double): void
+    +getPower(): double
+    +getVoltage(): double
+    +getFreq(): double
+    +sellPower(power: const double&): void
+    +buyPower(power: const double&): void
+    --
+    - m_Power: double
+    - m_Voltage: double
+    - m_Freq: double
+}
+
+class CHouse {
+    +CHouse()
+    +updateMeasurements(power: double, volt: double, current: double, freq: double): void
+    +registerObserver(obs: std::shared_ptr<IObserver>): void
+    +removeObserver(obs: std::shared_ptr<IObserver>): void
+    +notifyObservers(field: string, newValue: double): void
+    +setNotificationThreshold(field: string, threshold: double): void
+    +shouldNotify(field: string, newValue: double): bool
+    +getPowerConsumption(): double
+    +getVoltage(): double
+    +getCurrent(): double
+    +getFreq(): double
+    --
+    - m_NotificationThresholds: std::unordered_map<string, double>
+    - m_LastValues: std::unordered_map<string, double>
+    - m_Observers: std::vector<std::weak_ptr<IObserver>>
+    - m_Power: double
+    - m_Voltage: double
+    - m_Current: double
+    - m_Freq: double
+}
+
+class CPVPanel {
+    +CPVPanel()
+    +updateMeasurements(power: double, volt: double, current: double): void
+    +registerObserver(obs: std::shared_ptr<IObserver>): void
+    +removeObserver(obs: std::shared_ptr<IObserver>): void
+    +notifyObservers(field: string, newValue: double): void
+    +setNotificationThreshold(field: string, threshold: double): void
+    +shouldNotify(field: string, newValue: double): bool
+    +getPower(): double
+    +getVoltage(): double
+    +getCurrent(): double
+    --
+    - m_NotificationThresholds: std::unordered_map<string, double>
+    - m_LastValues: std::unordered_map<string, double>
+    - m_Observers: std::vector<std::weak_ptr<IObserver>>
+    - m_Power: double
+    - m_Voltage: double
+    - m_Current: double
+}
+
+class CReadConfig {
+    +CReadConfig(filename: string)
+    +m_InverterVendor: string
+    +m_BatteryVendor: string
+    +m_ControllerVendor: string
+    +m_TypeOfStorage: string
+    +m_NumberOfBatteryModules: int
+    +getJsonConfig(): nlohmann::json
+    --
+    - m_StorageConfig: nlohmann::json
+    - m_ConfigDir: const char* = "../ConfigFiles/"
+}
+
+class CStorageSystem {
+    +CStorageSystem(filename: string)
+    +initializeStorageSystem(): void
+    +displayConfig(): void
+    +calcMaxCharge(): double
+    +calcMaxDischarge(): double
+    +isBatteryFull(): bool
+    +isBatteryLow(): bool
+    +Charge(power: double): void
+    +Discharge(power: double): void
+    +getController(): std::shared_ptr<IController>
+    --
+    - m_Factory: CStorageFactory
+    - m_BatteryModules: std::unique_ptr<IBattery>
+    - m_Inverter: std::unique_ptr<IInverter>
+    - m_Controller: std::shared_ptr<IController>
+    - m_NumberOfBatteryModules: int
+}
+
+class CSupplyFromPVStrategy {
+    +manageEnergy(context: IEnergyContext*): void
+}
+
+class CSupplyFromStorageStrategy {
+    +manageEnergy(context: IEnergyContext*): void
+}
+
+class CVendorABattery {
+    +CVendorABattery(count: const int&)
+    +battery_count() : int
+    +read_voltage(index: int) : double
+    +read_temperature(index: int) : double
+    +read_max_power(index: int) : double
+    +read_max_temp(index: int) : double
+    +read_max_volt(index: int) : double
+    +read_min_volt(index: int) : double
+    +write_voltage(index: int, v: double) : void
+    +write_temperature(index: int, t: double) : void
+    +are_batteries_full() : bool
+    +are_batteries_low() : bool
+    +calc_charge_capacity() : double
+    +calc_discharge_capacity() : double
+    +vendorA_charge(watts: double) : void
+    +vendorA_discharge(watts: double) : void
+}
+
+class "CVendorABattery::Battery" as Battery {
+    - voltage : double
+    - temp : double
+    - max_power : const double
+    - max_temp : const double
+    - max_voltage : const double
+    - min_voltage : const double
+    + Battery(v: double, t: double, mp: double, maxv: double, minv: double, maxt: double)
+}
+
+class CVendorABatteryAdapter {
+    +CVendorABatteryAdapter(count: int)
+    +setVoltage(index: int, voltage: double): void
+    +setTemperature(index: int, temp: double): void
+    +updateMeasurements(voltages: std::vector<double>, temps: std::vector<double>): void
+    +getNumberOfBatteries(): int
+    +getVoltage(index: int): double
+    +getMaxPower(index: int): double
+    +getTemperature(index: int): double
+    +getMaxTemperature(index: int): double
+    +getFullVoltage(index: int): double
+    +getLowVoltage(index: int): double
+    +isBatteryLow(): bool
+    +isBatteryFull(): bool
+    +getBattChargeCapacity(): double
+    +getBattDischargeCapacity(): double
+    +charge(power: double): void
+    +discharge(power: double): void
+    --
+    - m_VendorBattery: CVendorABattery
+}
+
+class CVendorBInverter {
+    +CVendorBInverter()
+    +read_current() : double
+    +read_power() : double
+    +read_grid_voltage() : double
+    +read_grid_freq() : double
+    +read_max_charge_power() : double
+    +read_charge_efficiency() : double
+    +read_discharge_efficiency() : double
+    +write_current(c: double) : void
+    +write_power(p: double) : void
+    +write_grid_voltage(v: double) : void
+    +write_grid_freq(f: double) : void
+    --
+    -inverter: Inverter
+}
+
+class "CVendorBInverter::Inverter" as Inverter {
+    +current : double
+    +power : double
+    +grid_voltage : double
+    +grid_freq : double
+    +max_charge_power : const double
+    +charge_efficiency : const double
+    +discharge_efficiency : const double
+    +Inverter(c: double, p: double, gv: double, gf: double, mcp: double, ce: double, de: double)
+}
+
+class CVendorBInverterAdapter {
+    +CVendorBInverterAdapter()
+    +setCurrent(current: double): void
+    +setPower(power: double): void
+    +setGridVoltage(volt: double): void
+    +setGridFreq(freq: double): void
+    +getMaxChargePower() : double
+    +getChargeEfficiency() : double
+    +getDischargeEfficiency() : double
+    +getCurrent() : double
+    +getPower() : double
+    +getGridVoltage() : double
+    +getGridFreq() : double
+    --
+    - m_VendorInverter: CVendorBInverter
+}
+
+class CVendorXController {
+    +CVendorXController()
+    +setEnergySource(context: IEnergyContext*): void
+    +applyControlLogic(context: IEnergyContext*): void
+    --
+    - m_Strategy: std::unique_ptr<IEnergyStrategy>
+    - m_FirmwareVersion: string
+}
+
+class CVendorXControllerAdapter {
+    +CVendorXControllerAdapter()
+    +determineStrategy(context: IEnergyContext*): void
+    +executeStrategy(context: IEnergyContext*): void
+    +onUpdate(source: IObservable*, field: string, value: double): void
+    --
+    - m_ControllerX: CVendorXController
+}
+
+interface IBattery {
+    +setVoltage(index: int, voltage: double): void
+    +setTemperature(index: int, temp: double): void
+    +updateMeasurements(voltages: std::vector<double>, temps: std::vector<double>): void
+    +getNumberOfBatteries(): int
+    +getVoltage(index: int): double
+    +getMaxPower(index: int): double
+    +getTemperature(index: int): double
+    +getMaxTemperature(index: int): double
+    +getFullVoltage(index: int): double
+    +getLowVoltage(index: int): double
+    +charge(power: double): void
+    +discharge(power: double): void
+    +isBatteryLow(): bool
+    +isBatteryFull(): bool
+    +getBattChargeCapacity(): double
+    +getBattDischargeCapacity(): double
+}
+
+interface IController {
+    +determineStrategy(context: IEnergyContext*): void
+    +executeStrategy(context: IEnergyContext*): void
+    +setFirmwareVersion(ver: string): void
+    +getFirmwareVersion(): string
+}
+
+interface IEnergyContext {
+    +getPVPower() : double
+    +getHouseConsumption() : double
+    +getMaxCharge() : double
+    +getMaxDischarge() : double
+    +isBatteryFull() : bool
+    +isBatteryLow() : bool
+    +requestCharge(power: double) : void
+    +requestDischarge(power: double) : void
+    +sellToGrid(power: double) : void
+    +buyFromGrid(power: double) : void
+}
+
+interface IEnergyStrategy {
+    +manageEnergy(context: IEnergyContext*): void
+}
+
+interface IInverter {
+    +setCurrent(current: double): void
+    +setPower(power: double): void
+    +setGridVoltage(volt: double): void
+    +setGridFreq(freq: double): void
+    +getMaxChargePower() : double
+    +getChargeEfficiency() : double
+    +getDischargeEfficiency() : double
+    +getCurrent() : double
+    +getPower() : double
+    +getGridVoltage() : double
+    +getGridFreq() : double
+}
+
+interface IObservable {
+    +registerObserver(obs: std::shared_ptr<IObserver>): void
+    +removeObserver(obs: std::shared_ptr<IObserver>): void
+    +notifyObservers(field: string, newValue: double): void
+}
+
+interface IObserver {
+    +onUpdate(source: IObservable*, field: string, value: double): void
+}
+
+' External function for JSON deserialization
+CReadConfig ..> "from_json(json, CReadConfig&)" : from_json
+
+CPVPanel --|> IObservable
+
+CHouse --|> IObservable
+
+CEnergyContext --|> IEnergyContext
+CEnergyContext --|> IObserver
+CEnergyContext --> CStorageSystem
+CEnergyContext --> CGrid
+
+CStorageFactory *-- CReadConfig
+CStorageFactory ..> CVendorABatteryAdapter : creates
+CStorageFactory ..> CVendorBInverterAdapter : creates
+CStorageFactory ..> CVendorXControllerAdapter : creates
+CStorageFactory ..> IController : returns
+CStorageFactory ..> IInverter : returns
+CStorageFactory ..> IBattery : returns
+
+CStorageSystem --|> std::enable_shared_from_this<CStorageSystem>
+CStorageSystem *-- CStorageFactory
+CStorageSystem ..> IBattery : owns
+CStorageSystem ..> IInverter : owns
+CStorageSystem ..> IController : owns
+
+CSupplyFromPVStrategy --|> IEnergyStrategy
+
+CSupplyFromStorageStrategy --|> IEnergyStrategy
+
+CVendorABattery "1" *-- "0..*" Battery : contains
+
+CVendorABatteryAdapter --|> IBattery
+CVendorABatteryAdapter *-- CVendorABattery : uses
+
+CVendorBInverter *-- Inverter : contains
+
+CVendorBInverterAdapter --|> IInverter
+CVendorBInverterAdapter *-- CVendorBInverter : uses
+
+CVendorXController ..> IEnergyContext : uses
+CVendorXController ..> IEnergyStrategy : holds
+
+CVendorXControllerAdapter --|> IController
+CVendorXControllerAdapter *-- CVendorXController : uses
+
+IController --|> IObserver
+
+IEnergyContext --|> IObservable
+
+@enduml
