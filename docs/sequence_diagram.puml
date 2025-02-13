@@ -1,0 +1,36 @@
+@startuml Sequence Diagram
+title Energy Management System
+
+actor Main
+
+participant "CPVPanel" as CPV
+participant "CHouse" as House
+participant "CEnergyContext" as EnergyContext
+participant "Controller\n(CVendorXControllerAdapter)" as Controller
+participant "SupplyFromPVStrategy" as PVStrategy
+participant "SupplyFromStorageStrategy" as StorageStrategy
+
+Main -> CPV: updateMeasurements(power, volt, current)
+CPV -> CPV: Check if "power" > threshold
+CPV -> EnergyContext: notifyObservers("power", power)
+
+Main -> House: updateMeasurements(power, volt, current, freq)
+House -> House: Check if "power" > threshold
+House -> EnergyContext: notifyObservers("power", power)
+
+EnergyContext -> EnergyContext: onUpdate(source, "power", value)
+EnergyContext -> Controller: notifyObservers("power", value)
+
+Controller -> Controller: onUpdate(source, "power", value)
+Controller -> EnergyContext: getPVPower()
+Controller -> EnergyContext: getHouseConsumption()
+Controller -> Controller: determineStrategy(context)
+alt PV Power > House Consumption
+    Controller -> PVStrategy: executeStrategy(context)
+    PVStrategy -> PVStrategy: manageEnergy(context)
+else
+    Controller -> StorageStrategy: executeStrategy(context)
+    StorageStrategy -> StorageStrategy: manageEnergy(context)
+end
+
+@enduml

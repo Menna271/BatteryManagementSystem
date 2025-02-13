@@ -1,4 +1,3 @@
-// CHouse_test.cpp
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "CHouse.hpp"
