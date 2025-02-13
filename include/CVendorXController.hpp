@@ -7,14 +7,13 @@
 class CVendorXController 
 {
 public:
-    CVendorXController(std::shared_ptr<IEnergyContext> energyContext) 
-    : m_Context(energyContext), m_Strategy(nullptr) {}
+    CVendorXController() 
+    : m_Strategy(nullptr) {}
 
-    void setEnergySource();
-    void applyControlLogic();
+    void setEnergySource(IEnergyContext* context);
+    void applyControlLogic(IEnergyContext* context);
 
 private:
-    std::shared_ptr<IEnergyContext> m_Context;
     std::unique_ptr<IEnergyStrategy> m_Strategy;
     std::string m_FirmwareVersion;
 };

@@ -5,5 +5,5 @@
 class CSupplyFromStorageStrategy : public IEnergyStrategy
 {
 public:
-    void manageEnergy(std::shared_ptr<IEnergyContext> context) override;
+    void manageEnergy(IEnergyContext* context) override;
 };

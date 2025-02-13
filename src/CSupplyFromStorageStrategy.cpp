@@ -1,6 +1,6 @@
 #include "CSupplyFromStorageStrategy.hpp"
 
-void CSupplyFromStorageStrategy::manageEnergy(std::shared_ptr<IEnergyContext> context) {
+void CSupplyFromStorageStrategy::manageEnergy(IEnergyContext* context) {
     std::cout << "manage energy by supplying from storage" << std::endl;
     double house_load = context->getHouseConsumption();
     double pv_power = context->getPVPower();
@@ -15,5 +15,4 @@ void CSupplyFromStorageStrategy::manageEnergy(std::shared_ptr<IEnergyContext> co
     } else {
         context->buyFromGrid(deficit);
     }
-    context->sellToGrid(0.0);
 }

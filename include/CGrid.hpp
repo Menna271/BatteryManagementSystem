@@ -17,8 +17,12 @@ public:
     double getVoltage() const { return m_Voltage; }
     double getFreq() const { return m_Freq; }
 
-    void sellPower(const double& power) {  } 
-    void buyPower(const double& power) {  }
+    void sellPower(const double& power) {
+        std::cout << "selling " << power << " watt to grid" << std::endl;
+    }
+    void buyPower(const double& power) {
+        std::cout << "buying " << power << " watt from grid" << std::endl;
+    }
 
 private:
     double m_Power; 

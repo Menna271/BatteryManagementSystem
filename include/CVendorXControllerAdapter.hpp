@@ -6,12 +6,12 @@
 class CVendorXControllerAdapter : public IController
 {
 public:
-    CVendorXControllerAdapter(std::shared_ptr<IEnergyContext> energyContext) : m_ControllerX(energyContext) {}
+    CVendorXControllerAdapter() : m_ControllerX() {}
 
-    void determineStrategy() override;
-    void executeStrategy() override;
+    void determineStrategy(IEnergyContext* context) override;
+    void executeStrategy(IEnergyContext* context) override;
 
-    void onUpdate(const std::string& field, double value) override;
+    void onUpdate(IObservable* source, const std::string& field, double value) override;
     //void onSafetyEvent(const std::string& message, bool critical) override;
 
 private:

@@ -26,7 +26,7 @@ void CHouse::notifyObservers(const std::string& field, double newValue) {
     if (shouldNotify(field, newValue)) {
         for (auto& observer : m_Observers) {
             if (auto obs = observer.lock()) {
-                obs->onUpdate(field, newValue);
+                obs->onUpdate(this, field, newValue);
             }
         }
         m_LastValues[field] = newValue;

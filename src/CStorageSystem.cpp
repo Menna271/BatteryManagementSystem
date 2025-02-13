@@ -9,15 +9,11 @@ CStorageSystem::CStorageSystem(const std::string& filename)
 {
 }
 
-void CStorageSystem::initializeStorageSystem(std::shared_ptr<IEnergyContext> energyContext) {
+void CStorageSystem::initializeStorageSystem() {
     m_NumberOfBatteryModules = m_Factory.getNumberOfBatteryModules();
     m_BatteryModules = std::move(m_Factory.createBattery());
     m_Inverter = std::move(m_Factory.createInverter());
-    m_Controller = std::move(m_Factory.createController(energyContext));
-
-    if(m_Controller) {
-        energyContext->registerObserver(std::shared_ptr<IObserver>(m_Controller));
-    }
+    m_Controller = std::move(m_Factory.createController());
     
     displayConfig();
 }
@@ -53,7 +49,7 @@ void CStorageSystem::Charge(double power) {
 void CStorageSystem::Discharge(double power) {
     double efficiency = m_Inverter->getDischargeEfficiency();
     m_Inverter->setPower(-power*efficiency);
-    m_BatteryModules->charge(power);
+    m_BatteryModules->discharge(power);
 }
 
 bool CStorageSystem::isBatteryFull() {

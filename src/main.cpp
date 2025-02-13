@@ -5,24 +5,27 @@
 #include "CEnergyContext.hpp"
 #include <thread>
 #include <chrono>
+#include <random>
 
 int main() {
     auto storage = std::make_shared<CStorageSystem>("configA.json");
+    storage->initializeStorageSystem();
     auto grid = std::make_shared<CGrid>();
     auto panel = std::make_shared<CPVPanel>();
     auto house = std::make_shared<CHouse>();
     auto context = std::make_shared<CEnergyContext>(storage, grid);
-    storage->initializeStorageSystem(context);
     panel->registerObserver(context);
     house->registerObserver(context);
 
-    while(true) {
-        panel->updateMeasurements(3500.0,230.0,15.0);
-        house->updateMeasurements(4000.0,230.0,16.0,60.0);
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+    // for testing 
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(3500.0, 4800.0);
 
-        panel->updateMeasurements(4000.0,230.0,15.0);
-        house->updateMeasurements(3500.0,230.0,16.0,60.0);
+    while(true) {
+        // read measurements from sensors every 5 sec
+        panel->updateMeasurements(dis(gen),230.0,15.0);
+        house->updateMeasurements(dis(gen),230.0,16.0,60.0);
         std::this_thread::sleep_for(std::chrono::seconds(5));
     }
     return 0;

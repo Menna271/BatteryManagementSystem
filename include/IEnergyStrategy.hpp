@@ -6,6 +6,6 @@
 class IEnergyStrategy
 {
 public:
-    virtual void manageEnergy(std::shared_ptr<IEnergyContext> context) = 0;
+    virtual void manageEnergy(IEnergyContext* context) = 0;
     virtual ~IEnergyStrategy() {}
 };

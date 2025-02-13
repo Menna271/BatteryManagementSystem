@@ -8,8 +8,8 @@ class IController : public IObserver
 {
 public:
     //virtual void setStrategy(std::unique_ptr<IEnergyStrategy> strategy) = 0;
-    virtual void determineStrategy() = 0;
-    virtual void executeStrategy() = 0;
+    virtual void determineStrategy(IEnergyContext* context) = 0;
+    virtual void executeStrategy(IEnergyContext* context) = 0;
 
     virtual void setFirmwareVersion(const std::string& ver) { m_FirmwareVersion = ver; }
     

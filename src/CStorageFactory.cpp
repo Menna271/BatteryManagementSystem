@@ -5,10 +5,10 @@ CStorageFactory::CStorageFactory(const std::string& filename)
 {
 }
 
-std::shared_ptr<IController> CStorageFactory::createController(std::shared_ptr<IEnergyContext> energyContext) {
+std::shared_ptr<IController> CStorageFactory::createController() {
     std::string controller = m_Config.m_ControllerVendor;
     if(controller == "VendorX") {
-        return std::make_shared<CVendorXControllerAdapter>(energyContext);
+        return std::make_shared<CVendorXControllerAdapter>();
     }
     throw std::invalid_argument("Unsupported vendor");
 }

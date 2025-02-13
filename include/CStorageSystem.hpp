@@ -11,7 +11,7 @@ class CStorageSystem : public std::enable_shared_from_this<CStorageSystem>
 public:
     CStorageSystem(const std::string& filename);
 
-    void initializeStorageSystem(std::shared_ptr<IEnergyContext> energyContext);
+    void initializeStorageSystem();
     void displayConfig();
 
     double calcMaxCharge() const;
@@ -22,6 +22,8 @@ public:
 
     void Charge(double power);     
     void Discharge(double power );  
+
+    std::shared_ptr<IController> getController() const { return m_Controller; }
 
 private:
     CStorageFactory m_Factory;

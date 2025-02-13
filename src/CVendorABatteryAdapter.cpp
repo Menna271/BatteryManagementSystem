@@ -18,31 +18,31 @@ void CVendorABatteryAdapter::updateMeasurements(const std::vector<double>& volta
 }
 
 int CVendorABatteryAdapter::getNumberOfBatteries() const {
-    m_VendorBattery.battery_count();
+    return m_VendorBattery.battery_count();
 }
 
 double CVendorABatteryAdapter::getVoltage(int index) const {
-    m_VendorBattery.read_voltage(index);
+    return m_VendorBattery.read_voltage(index);
 }
 
 double CVendorABatteryAdapter::getMaxPower(int index) const {
-    m_VendorBattery.read_max_power(index);
+    return m_VendorBattery.read_max_power(index);
 }
 
 double CVendorABatteryAdapter::getTemperature(int index) const {
-    m_VendorBattery.read_temperature(index);
+    return m_VendorBattery.read_temperature(index);
 }
 
 double CVendorABatteryAdapter::getMaxTemperature(int index) const {
-    m_VendorBattery.read_max_temp(index);
+    return m_VendorBattery.read_max_temp(index);
 }
 
 double CVendorABatteryAdapter::getFullVoltage(int index) const {
-    m_VendorBattery.read_max_volt(index);
+    return m_VendorBattery.read_max_volt(index);
 }
 
 double CVendorABatteryAdapter::getLowVoltage(int index) const {
-    m_VendorBattery.read_min_volt(index);
+    return m_VendorBattery.read_min_volt(index);
 }
 
 void CVendorABatteryAdapter::charge(double power) {

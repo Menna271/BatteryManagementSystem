@@ -21,7 +21,7 @@ class CVendorABattery
     std::vector<Battery> batteries;
 
 public:
-    CVendorABattery(const int& count) : batteries(count, {13.8, 25.0, 1000.0, 60.0, 13.8, 11.5}) {}
+    CVendorABattery(const int& count) : batteries(count, {13.8, 25.0, 1000.0, 13.8, 11.5, 65.0}) {}
 
     int battery_count() const { return batteries.size(); }
     double read_voltage(int index) const { return batteries[index].voltage; }

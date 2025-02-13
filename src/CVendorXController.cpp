@@ -1,21 +1,18 @@
 #include "CVendorXController.hpp"
 
-void CVendorXController::setEnergySource() {
-    double houseConsumption = m_Context->getHouseConsumption();
-    double pvPower = m_Context->getPVPower();
-    std::cout << "PV power: " << pvPower << " house consumption: " << houseConsumption << std::endl;
+void CVendorXController::setEnergySource(IEnergyContext* context) {
+    double houseConsumption = context->getHouseConsumption();
+    double pvPower = context->getPVPower();
+    std::cout << "pv power: " << pvPower << " house consumption: " << houseConsumption << std::endl;
     if (pvPower > houseConsumption) {
         m_Strategy = std::make_unique<CSupplyFromPVStrategy>();
-        std::cout << "Supply from PV" << std::endl;
     } else {
         m_Strategy = std::make_unique<CSupplyFromStorageStrategy>();
-        std::cout << "Supply from Storage" << std::endl;
     }
-    applyControlLogic();
 }
 
-void CVendorXController::applyControlLogic() {
+void CVendorXController::applyControlLogic(IEnergyContext* context) {
     if(m_Strategy) {
-        m_Strategy->manageEnergy(m_Context);
+        m_Strategy->manageEnergy(context);
     }
 }

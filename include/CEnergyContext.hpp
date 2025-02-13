@@ -8,10 +8,9 @@
 class CEnergyContext : public IEnergyContext, public IObserver 
 {
 public:
-    CEnergyContext(std::shared_ptr<CStorageSystem> storage, std::shared_ptr<CGrid> grid)
-        : m_Storage(storage), m_Grid(grid) {}
+    CEnergyContext(std::shared_ptr<CStorageSystem> storage, std::shared_ptr<CGrid> grid);
 
-    void onUpdate(const std::string& field, double value) override;
+    void onUpdate(IObservable* source, const std::string& field, double value) override;
     double getPVPower() const override;
     double getHouseConsumption() const override;
     void requestCharge(double power) override;

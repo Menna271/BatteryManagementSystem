@@ -17,7 +17,7 @@ public:
     std::string getStorageType() const { return m_Config.m_TypeOfStorage; }
     int getNumberOfBatteryModules() const { return m_Config.m_NumberOfBatteryModules; }
 
-    std::shared_ptr<IController> createController(std::shared_ptr<IEnergyContext> energyContext);
+    std::shared_ptr<IController> createController();
     std::unique_ptr<IInverter> createInverter();
     std::unique_ptr<IBattery> createBattery();
 
