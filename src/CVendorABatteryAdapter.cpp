@@ -5,16 +5,8 @@ void CVendorABatteryAdapter::setVoltage(int index, double voltage) {
   //  checkVoltage(index, voltage);
 }
 
-void CVendorABatteryAdapter::setTemperature(int index, double temp) {
-    m_VendorBattery.write_temperature(index, temp);
-   // checkTemperature(index, temp);
-}
-
-void CVendorABatteryAdapter::updateMeasurements(const std::vector<double>& voltages,const std::vector<double>& temps) {
-    for(size_t i = 0; i < m_VendorBattery.battery_count(); ++i) {
-        setVoltage(i, voltages[i]);
-        setTemperature(i, temps[i]);
-    }
+void CVendorABatteryAdapter::setTemperature(double temp) {
+    m_VendorBattery.write_temperature(temp);
 }
 
 int CVendorABatteryAdapter::getNumberOfBatteries() const {
@@ -33,8 +25,8 @@ double CVendorABatteryAdapter::getTemperature(int index) const {
     return m_VendorBattery.read_temperature(index);
 }
 
-double CVendorABatteryAdapter::getMaxTemperature(int index) const {
-    return m_VendorBattery.read_max_temp(index);
+double CVendorABatteryAdapter::getMaxTemperature() const {
+    return m_VendorBattery.read_max_temp();
 }
 
 double CVendorABatteryAdapter::getFullVoltage(int index) const {
@@ -68,29 +60,3 @@ double CVendorABatteryAdapter::getBattChargeCapacity() const {
 double CVendorABatteryAdapter::getBattDischargeCapacity() const {
     return m_VendorBattery.calc_discharge_capacity();
 }
-
-// void CVendorABatteryAdapter::checkVoltage(int index, double volt) {
-//     if(m_VendorBattery.is_voltage_below_threshold(index, volt)) {
-//         for (auto& observer : m_Observers) {
-//             if (auto obs = observer.lock()) {
-//                 obs->onSafetyEvent(
-//                     "Battery " + std::to_string(index) + 
-//                     " low: " + std::to_string(volt), true
-//                 );
-//             }
-//         }
-//     }
-// }
-
-// void CVendorABatteryAdapter::checkTemperature(int index, double temp) {
-//     if(m_VendorBattery.is_temp_above_threshold(index, temp)) {
-//         for (auto& observer : m_Observers) {
-//             if (auto obs = observer.lock()) {
-//                 obs->onSafetyEvent(
-//                     "Battery " + std::to_string(index) + 
-//                     " overheating: " + std::to_string(temp), true
-//                 );
-//             }
-//         }
-//     }
-// }

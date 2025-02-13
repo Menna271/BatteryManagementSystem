@@ -12,6 +12,7 @@ public:
     virtual bool isBatteryLow() = 0;
     virtual void requestCharge(double power) = 0;
     virtual void requestDischarge(double power) = 0;
+    virtual void setBatteryTemperature(double temp) = 0;
     virtual void sellToGrid(double power) = 0;
     virtual void buyFromGrid(double power) = 0;
     virtual ~IEnergyContext() = default;

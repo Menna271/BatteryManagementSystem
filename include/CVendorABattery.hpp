@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <limits>
 #include <iostream>
 
 class CVendorABattery 
@@ -27,12 +28,12 @@ public:
     double read_voltage(int index) const { return batteries[index].voltage; }
     double read_temperature(int index) const { return batteries[index].temp; }
     double read_max_power(int index) const { return batteries[index].max_power; }
-    double read_max_temp(int index) const { return batteries[index].max_temp; }
+    double read_max_temp() const;
     double read_max_volt(int index) const { return batteries[index].max_voltage; }
     double read_min_volt(int index) const {return batteries[index].min_voltage; }
 
     void write_voltage(int index, double v) { batteries[index].voltage = v; }
-    void write_temperature(int index, double t) { batteries[index].temp = t; }
+    void write_temperature(double t);
     
     bool are_batteries_full() const;
     bool are_batteries_low() const;

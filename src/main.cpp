@@ -20,12 +20,15 @@ int main() {
     // for testing 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(3500.0, 4800.0);
+    std::uniform_real_distribution<> pow(3500.0, 4800.0);
+    std::uniform_real_distribution<> temp(60.0, 70.0);
 
     while(true) {
         // read measurements from sensors every 5 sec
-        panel->updateMeasurements(dis(gen),230.0,15.0);
-        house->updateMeasurements(dis(gen),230.0,16.0,60.0);
+        panel->updateMeasurements(pow(gen),230.0,15.0);
+        house->updateMeasurements(pow(gen),230.0,16.0,60.0);
+        context->setBatteryTemperature(temp(gen));
+        std::cout << "----------------------------------------" << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(5));
     }
     return 0;

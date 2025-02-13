@@ -49,3 +49,20 @@ double CVendorABattery::calc_discharge_capacity() const {
     }
     return available_power;
 }
+
+void CVendorABattery::write_temperature(double t) {
+    for(auto& batt : batteries) {
+        batt.temp = t;
+    }
+    std::cout << "Battery temperature: " << t << std::endl;
+}
+
+double CVendorABattery::read_max_temp() const {
+    double max_temp = std::numeric_limits<int>::max();
+    for(auto& batt : batteries) {
+        if (batt.max_temp < max_temp) {
+            max_temp = batt.max_temp;
+        }
+    }
+    return max_temp;
+}

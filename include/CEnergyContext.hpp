@@ -15,6 +15,7 @@ public:
     double getHouseConsumption() const override;
     void requestCharge(double power) override;
     void requestDischarge(double power) override;
+    void setBatteryTemperature(double temp) override;
     double getMaxCharge() const override;
     double getMaxDischarge() const override;
     bool isBatteryFull() override;
@@ -26,7 +27,8 @@ public:
     void notifyObservers(const std::string& field, double newValue) override;
 
 private:
-    std::unordered_map<std::string, double> m_Values = {{"pv.power", 0.0}, {"house.power", 0.0}};
+    std::unordered_map<std::string, double> m_Values = 
+            {{"batt.temp", 25.0}, {"pv.power", 0.0}, {"house.power", 0.0}};
     std::vector<std::weak_ptr<IObserver>> m_Observers;
     std::shared_ptr<CStorageSystem> m_Storage;
     std::shared_ptr<CGrid> m_Grid;

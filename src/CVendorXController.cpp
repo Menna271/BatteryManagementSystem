@@ -16,3 +16,25 @@ void CVendorXController::applyControlLogic(IEnergyContext* context) {
         m_Strategy->manageEnergy(context);
     }
 }
+
+void CVendorXController::turn_cooler_on() {
+    std::cout << "Activating cooler" << std::endl;
+    m_isCoolerOn = true;
+}
+
+void CVendorXController::turn_cooler_off() {
+    std::cout << "Deactivating cooler" << std::endl;
+    m_isCoolerOn = false;
+}
+
+void CVendorXController::write_firmware_version(const std::string& ver) {
+    m_FirmwareVersion = ver;
+}
+
+std::string CVendorXController::read_firmware_version() const {
+    return m_FirmwareVersion;
+}
+
+bool CVendorXController::getCoolerState() {
+    return m_isCoolerOn;
+}

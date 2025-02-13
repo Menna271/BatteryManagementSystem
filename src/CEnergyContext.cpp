@@ -8,7 +8,6 @@ CEnergyContext::CEnergyContext(std::shared_ptr<CStorageSystem> storage, std::sha
 }
 
 void CEnergyContext::onUpdate(IObservable* source, const std::string& field, double value) {
-    // Store values with source id
     m_Values[field] = value;
     notifyObservers(field, value); 
 }
@@ -101,4 +100,14 @@ void CEnergyContext::notifyObservers(const std::string& field, double newValue) 
             obs->onUpdate(this, field, newValue);
         }
     }
+}
+
+void CEnergyContext::setBatteryTemperature(double temp) {
+    m_Storage->setBatteryTemp(temp);
+    double maxTemp = m_Storage->getMaxBatteryTemp();
+    if((m_Values["batt.temp"] < maxTemp && temp > maxTemp) ||
+        (m_Values["batt.temp"] > maxTemp && temp < maxTemp)) {
+        m_Values["batt.temp"] = temp;
+        notifyObservers("batt.temp", temp);
+    } 
 }

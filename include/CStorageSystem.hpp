@@ -23,6 +23,9 @@ public:
     void Charge(double power);     
     void Discharge(double power );  
 
+    void setBatteryTemp(double temp) { m_BatteryModules->setTemperature(temp); }
+    double getMaxBatteryTemp() const { return m_BatteryModules->getMaxTemperature(); }
+
     std::shared_ptr<IController> getController() const { return m_Controller; }
 
 private:

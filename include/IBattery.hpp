@@ -7,15 +7,13 @@ class IBattery
 {
 public:
     virtual void setVoltage(int index, double voltage) = 0;
-    virtual void setTemperature(int index, double temp) = 0;
-
-    virtual void updateMeasurements(const std::vector<double>& voltages,const std::vector<double>& temps) = 0;
+    virtual void setTemperature(double temp) = 0;
 
     virtual int getNumberOfBatteries() const = 0;
     virtual double getVoltage(int index) const = 0;
     virtual double getMaxPower(int index) const = 0;
     virtual double getTemperature(int index) const = 0;
-    virtual double getMaxTemperature(int index) const = 0;
+    virtual double getMaxTemperature() const = 0;
     virtual double getFullVoltage(int index) const = 0;
     virtual double getLowVoltage(int index) const = 0;
 
@@ -27,8 +25,6 @@ public:
 
     virtual double getBattChargeCapacity() const = 0;
     virtual double getBattDischargeCapacity() const = 0;
-    // virtual void checkVoltage(int index, double volt) = 0;
-    // virtual void checkTemperature(int index, double temp) = 0;
 
     virtual ~IBattery() = default;
 };

@@ -12,7 +12,14 @@ public:
     void executeStrategy(IEnergyContext* context) override;
 
     void onUpdate(IObservable* source, const std::string& field, double value) override;
-    //void onSafetyEvent(const std::string& message, bool critical) override;
+    
+    void activateCooler() override;
+    void deactivateCooler() override;
+    void determineCoolerState();
+
+    void setFirmwareVersion(const std::string& ver) override;
+    
+    std::string getFirmwareVersion() const override;
 
 private:
     CVendorXController m_ControllerX;
