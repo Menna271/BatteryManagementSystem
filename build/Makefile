@@ -117,353 +117,43 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MyExecutable
+# Target rules for targets named SonnenBatterieLib
 
 # Build rule for target.
-MyExecutable: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MyExecutable
-.PHONY : MyExecutable
+SonnenBatterieLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SonnenBatterieLib
+.PHONY : SonnenBatterieLib
 
 # fast build rule for target.
-MyExecutable/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/build
-.PHONY : MyExecutable/fast
-
-src/CEnergyContext.o: src/CEnergyContext.cpp.o
-.PHONY : src/CEnergyContext.o
-
-# target to build an object file
-src/CEnergyContext.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CEnergyContext.cpp.o
-.PHONY : src/CEnergyContext.cpp.o
-
-src/CEnergyContext.i: src/CEnergyContext.cpp.i
-.PHONY : src/CEnergyContext.i
-
-# target to preprocess a source file
-src/CEnergyContext.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CEnergyContext.cpp.i
-.PHONY : src/CEnergyContext.cpp.i
-
-src/CEnergyContext.s: src/CEnergyContext.cpp.s
-.PHONY : src/CEnergyContext.s
-
-# target to generate assembly for a file
-src/CEnergyContext.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CEnergyContext.cpp.s
-.PHONY : src/CEnergyContext.cpp.s
-
-src/CHouse.o: src/CHouse.cpp.o
-.PHONY : src/CHouse.o
-
-# target to build an object file
-src/CHouse.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CHouse.cpp.o
-.PHONY : src/CHouse.cpp.o
-
-src/CHouse.i: src/CHouse.cpp.i
-.PHONY : src/CHouse.i
-
-# target to preprocess a source file
-src/CHouse.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CHouse.cpp.i
-.PHONY : src/CHouse.cpp.i
-
-src/CHouse.s: src/CHouse.cpp.s
-.PHONY : src/CHouse.s
-
-# target to generate assembly for a file
-src/CHouse.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CHouse.cpp.s
-.PHONY : src/CHouse.cpp.s
-
-src/CPVPanel.o: src/CPVPanel.cpp.o
-.PHONY : src/CPVPanel.o
-
-# target to build an object file
-src/CPVPanel.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CPVPanel.cpp.o
-.PHONY : src/CPVPanel.cpp.o
-
-src/CPVPanel.i: src/CPVPanel.cpp.i
-.PHONY : src/CPVPanel.i
-
-# target to preprocess a source file
-src/CPVPanel.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CPVPanel.cpp.i
-.PHONY : src/CPVPanel.cpp.i
-
-src/CPVPanel.s: src/CPVPanel.cpp.s
-.PHONY : src/CPVPanel.s
-
-# target to generate assembly for a file
-src/CPVPanel.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CPVPanel.cpp.s
-.PHONY : src/CPVPanel.cpp.s
-
-src/CReadConfig.o: src/CReadConfig.cpp.o
-.PHONY : src/CReadConfig.o
-
-# target to build an object file
-src/CReadConfig.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CReadConfig.cpp.o
-.PHONY : src/CReadConfig.cpp.o
-
-src/CReadConfig.i: src/CReadConfig.cpp.i
-.PHONY : src/CReadConfig.i
-
-# target to preprocess a source file
-src/CReadConfig.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CReadConfig.cpp.i
-.PHONY : src/CReadConfig.cpp.i
-
-src/CReadConfig.s: src/CReadConfig.cpp.s
-.PHONY : src/CReadConfig.s
-
-# target to generate assembly for a file
-src/CReadConfig.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CReadConfig.cpp.s
-.PHONY : src/CReadConfig.cpp.s
-
-src/CStorageFactory.o: src/CStorageFactory.cpp.o
-.PHONY : src/CStorageFactory.o
-
-# target to build an object file
-src/CStorageFactory.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CStorageFactory.cpp.o
-.PHONY : src/CStorageFactory.cpp.o
-
-src/CStorageFactory.i: src/CStorageFactory.cpp.i
-.PHONY : src/CStorageFactory.i
-
-# target to preprocess a source file
-src/CStorageFactory.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CStorageFactory.cpp.i
-.PHONY : src/CStorageFactory.cpp.i
-
-src/CStorageFactory.s: src/CStorageFactory.cpp.s
-.PHONY : src/CStorageFactory.s
-
-# target to generate assembly for a file
-src/CStorageFactory.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CStorageFactory.cpp.s
-.PHONY : src/CStorageFactory.cpp.s
-
-src/CStorageSystem.o: src/CStorageSystem.cpp.o
-.PHONY : src/CStorageSystem.o
-
-# target to build an object file
-src/CStorageSystem.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CStorageSystem.cpp.o
-.PHONY : src/CStorageSystem.cpp.o
-
-src/CStorageSystem.i: src/CStorageSystem.cpp.i
-.PHONY : src/CStorageSystem.i
-
-# target to preprocess a source file
-src/CStorageSystem.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CStorageSystem.cpp.i
-.PHONY : src/CStorageSystem.cpp.i
-
-src/CStorageSystem.s: src/CStorageSystem.cpp.s
-.PHONY : src/CStorageSystem.s
-
-# target to generate assembly for a file
-src/CStorageSystem.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CStorageSystem.cpp.s
-.PHONY : src/CStorageSystem.cpp.s
-
-src/CSupplyFromPVStrategy.o: src/CSupplyFromPVStrategy.cpp.o
-.PHONY : src/CSupplyFromPVStrategy.o
-
-# target to build an object file
-src/CSupplyFromPVStrategy.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CSupplyFromPVStrategy.cpp.o
-.PHONY : src/CSupplyFromPVStrategy.cpp.o
-
-src/CSupplyFromPVStrategy.i: src/CSupplyFromPVStrategy.cpp.i
-.PHONY : src/CSupplyFromPVStrategy.i
-
-# target to preprocess a source file
-src/CSupplyFromPVStrategy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CSupplyFromPVStrategy.cpp.i
-.PHONY : src/CSupplyFromPVStrategy.cpp.i
-
-src/CSupplyFromPVStrategy.s: src/CSupplyFromPVStrategy.cpp.s
-.PHONY : src/CSupplyFromPVStrategy.s
-
-# target to generate assembly for a file
-src/CSupplyFromPVStrategy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CSupplyFromPVStrategy.cpp.s
-.PHONY : src/CSupplyFromPVStrategy.cpp.s
-
-src/CSupplyFromStorageStrategy.o: src/CSupplyFromStorageStrategy.cpp.o
-.PHONY : src/CSupplyFromStorageStrategy.o
-
-# target to build an object file
-src/CSupplyFromStorageStrategy.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CSupplyFromStorageStrategy.cpp.o
-.PHONY : src/CSupplyFromStorageStrategy.cpp.o
-
-src/CSupplyFromStorageStrategy.i: src/CSupplyFromStorageStrategy.cpp.i
-.PHONY : src/CSupplyFromStorageStrategy.i
-
-# target to preprocess a source file
-src/CSupplyFromStorageStrategy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CSupplyFromStorageStrategy.cpp.i
-.PHONY : src/CSupplyFromStorageStrategy.cpp.i
-
-src/CSupplyFromStorageStrategy.s: src/CSupplyFromStorageStrategy.cpp.s
-.PHONY : src/CSupplyFromStorageStrategy.s
-
-# target to generate assembly for a file
-src/CSupplyFromStorageStrategy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CSupplyFromStorageStrategy.cpp.s
-.PHONY : src/CSupplyFromStorageStrategy.cpp.s
-
-src/CVendorABattery.o: src/CVendorABattery.cpp.o
-.PHONY : src/CVendorABattery.o
-
-# target to build an object file
-src/CVendorABattery.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorABattery.cpp.o
-.PHONY : src/CVendorABattery.cpp.o
-
-src/CVendorABattery.i: src/CVendorABattery.cpp.i
-.PHONY : src/CVendorABattery.i
-
-# target to preprocess a source file
-src/CVendorABattery.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorABattery.cpp.i
-.PHONY : src/CVendorABattery.cpp.i
-
-src/CVendorABattery.s: src/CVendorABattery.cpp.s
-.PHONY : src/CVendorABattery.s
-
-# target to generate assembly for a file
-src/CVendorABattery.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorABattery.cpp.s
-.PHONY : src/CVendorABattery.cpp.s
-
-src/CVendorABatteryAdapter.o: src/CVendorABatteryAdapter.cpp.o
-.PHONY : src/CVendorABatteryAdapter.o
-
-# target to build an object file
-src/CVendorABatteryAdapter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorABatteryAdapter.cpp.o
-.PHONY : src/CVendorABatteryAdapter.cpp.o
-
-src/CVendorABatteryAdapter.i: src/CVendorABatteryAdapter.cpp.i
-.PHONY : src/CVendorABatteryAdapter.i
-
-# target to preprocess a source file
-src/CVendorABatteryAdapter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorABatteryAdapter.cpp.i
-.PHONY : src/CVendorABatteryAdapter.cpp.i
-
-src/CVendorABatteryAdapter.s: src/CVendorABatteryAdapter.cpp.s
-.PHONY : src/CVendorABatteryAdapter.s
-
-# target to generate assembly for a file
-src/CVendorABatteryAdapter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorABatteryAdapter.cpp.s
-.PHONY : src/CVendorABatteryAdapter.cpp.s
-
-src/CVendorBInverterAdapter.o: src/CVendorBInverterAdapter.cpp.o
-.PHONY : src/CVendorBInverterAdapter.o
-
-# target to build an object file
-src/CVendorBInverterAdapter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorBInverterAdapter.cpp.o
-.PHONY : src/CVendorBInverterAdapter.cpp.o
-
-src/CVendorBInverterAdapter.i: src/CVendorBInverterAdapter.cpp.i
-.PHONY : src/CVendorBInverterAdapter.i
-
-# target to preprocess a source file
-src/CVendorBInverterAdapter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorBInverterAdapter.cpp.i
-.PHONY : src/CVendorBInverterAdapter.cpp.i
-
-src/CVendorBInverterAdapter.s: src/CVendorBInverterAdapter.cpp.s
-.PHONY : src/CVendorBInverterAdapter.s
-
-# target to generate assembly for a file
-src/CVendorBInverterAdapter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorBInverterAdapter.cpp.s
-.PHONY : src/CVendorBInverterAdapter.cpp.s
-
-src/CVendorXController.o: src/CVendorXController.cpp.o
-.PHONY : src/CVendorXController.o
-
-# target to build an object file
-src/CVendorXController.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorXController.cpp.o
-.PHONY : src/CVendorXController.cpp.o
-
-src/CVendorXController.i: src/CVendorXController.cpp.i
-.PHONY : src/CVendorXController.i
-
-# target to preprocess a source file
-src/CVendorXController.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorXController.cpp.i
-.PHONY : src/CVendorXController.cpp.i
-
-src/CVendorXController.s: src/CVendorXController.cpp.s
-.PHONY : src/CVendorXController.s
-
-# target to generate assembly for a file
-src/CVendorXController.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorXController.cpp.s
-.PHONY : src/CVendorXController.cpp.s
-
-src/CVendorXControllerAdapter.o: src/CVendorXControllerAdapter.cpp.o
-.PHONY : src/CVendorXControllerAdapter.o
-
-# target to build an object file
-src/CVendorXControllerAdapter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorXControllerAdapter.cpp.o
-.PHONY : src/CVendorXControllerAdapter.cpp.o
-
-src/CVendorXControllerAdapter.i: src/CVendorXControllerAdapter.cpp.i
-.PHONY : src/CVendorXControllerAdapter.i
-
-# target to preprocess a source file
-src/CVendorXControllerAdapter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorXControllerAdapter.cpp.i
-.PHONY : src/CVendorXControllerAdapter.cpp.i
-
-src/CVendorXControllerAdapter.s: src/CVendorXControllerAdapter.cpp.s
-.PHONY : src/CVendorXControllerAdapter.s
-
-# target to generate assembly for a file
-src/CVendorXControllerAdapter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/CVendorXControllerAdapter.cpp.s
-.PHONY : src/CVendorXControllerAdapter.cpp.s
-
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
-
-# target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
-
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
-
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+SonnenBatterieLib/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/SonnenBatterieLib.dir/build.make src/CMakeFiles/SonnenBatterieLib.dir/build
+.PHONY : SonnenBatterieLib/fast
+
+#=============================================================================
+# Target rules for targets named SonnenBatterie
+
+# Build rule for target.
+SonnenBatterie: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SonnenBatterie
+.PHONY : SonnenBatterie
+
+# fast build rule for target.
+SonnenBatterie/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/SonnenBatterie.dir/build.make src/CMakeFiles/SonnenBatterie.dir/build
+.PHONY : SonnenBatterie/fast
+
+#=============================================================================
+# Target rules for targets named SonnenBatterieTests
+
+# Build rule for target.
+SonnenBatterieTests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SonnenBatterieTests
+.PHONY : SonnenBatterieTests
+
+# fast build rule for target.
+SonnenBatterieTests/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/SonnenBatterieTests.dir/build.make tests/CMakeFiles/SonnenBatterieTests.dir/build
+.PHONY : SonnenBatterieTests/fast
 
 # Help Target
 help:
@@ -473,49 +163,9 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... MyExecutable"
-	@echo "... src/CEnergyContext.o"
-	@echo "... src/CEnergyContext.i"
-	@echo "... src/CEnergyContext.s"
-	@echo "... src/CHouse.o"
-	@echo "... src/CHouse.i"
-	@echo "... src/CHouse.s"
-	@echo "... src/CPVPanel.o"
-	@echo "... src/CPVPanel.i"
-	@echo "... src/CPVPanel.s"
-	@echo "... src/CReadConfig.o"
-	@echo "... src/CReadConfig.i"
-	@echo "... src/CReadConfig.s"
-	@echo "... src/CStorageFactory.o"
-	@echo "... src/CStorageFactory.i"
-	@echo "... src/CStorageFactory.s"
-	@echo "... src/CStorageSystem.o"
-	@echo "... src/CStorageSystem.i"
-	@echo "... src/CStorageSystem.s"
-	@echo "... src/CSupplyFromPVStrategy.o"
-	@echo "... src/CSupplyFromPVStrategy.i"
-	@echo "... src/CSupplyFromPVStrategy.s"
-	@echo "... src/CSupplyFromStorageStrategy.o"
-	@echo "... src/CSupplyFromStorageStrategy.i"
-	@echo "... src/CSupplyFromStorageStrategy.s"
-	@echo "... src/CVendorABattery.o"
-	@echo "... src/CVendorABattery.i"
-	@echo "... src/CVendorABattery.s"
-	@echo "... src/CVendorABatteryAdapter.o"
-	@echo "... src/CVendorABatteryAdapter.i"
-	@echo "... src/CVendorABatteryAdapter.s"
-	@echo "... src/CVendorBInverterAdapter.o"
-	@echo "... src/CVendorBInverterAdapter.i"
-	@echo "... src/CVendorBInverterAdapter.s"
-	@echo "... src/CVendorXController.o"
-	@echo "... src/CVendorXController.i"
-	@echo "... src/CVendorXController.s"
-	@echo "... src/CVendorXControllerAdapter.o"
-	@echo "... src/CVendorXControllerAdapter.i"
-	@echo "... src/CVendorXControllerAdapter.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... SonnenBatterie"
+	@echo "... SonnenBatterieLib"
+	@echo "... SonnenBatterieTests"
 .PHONY : help
 
 

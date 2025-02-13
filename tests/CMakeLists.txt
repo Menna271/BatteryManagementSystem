@@ -3,6 +3,9 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(SonnenBatterieTests
     SupplyFromPVStrategy_test.cpp
+    SupplyFromStorageStrategy_test.cpp
+    ReadConfig_test.cpp
+    Observer_test.cpp
     main.cpp  
 )
 

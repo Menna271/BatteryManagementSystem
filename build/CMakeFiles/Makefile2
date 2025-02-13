@@ -63,42 +63,129 @@ CMAKE_BINARY_DIR = /home/menna/Documents/sonnenBatterie/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/MyExecutable.dir/all
+all: src/all
+all: tests/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: src/preinstall
+preinstall: tests/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/MyExecutable.dir/clean
+clean: src/clean
+clean: tests/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/MyExecutable.dir
+# Directory level rules for directory src
+
+# Recursive "all" directory target.
+src/all: src/CMakeFiles/SonnenBatterieLib.dir/all
+src/all: src/CMakeFiles/SonnenBatterie.dir/all
+.PHONY : src/all
+
+# Recursive "preinstall" directory target.
+src/preinstall:
+.PHONY : src/preinstall
+
+# Recursive "clean" directory target.
+src/clean: src/CMakeFiles/SonnenBatterieLib.dir/clean
+src/clean: src/CMakeFiles/SonnenBatterie.dir/clean
+.PHONY : src/clean
+
+#=============================================================================
+# Directory level rules for directory tests
+
+# Recursive "all" directory target.
+tests/all: tests/CMakeFiles/SonnenBatterieTests.dir/all
+.PHONY : tests/all
+
+# Recursive "preinstall" directory target.
+tests/preinstall:
+.PHONY : tests/preinstall
+
+# Recursive "clean" directory target.
+tests/clean: tests/CMakeFiles/SonnenBatterieTests.dir/clean
+.PHONY : tests/clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/SonnenBatterieLib.dir
 
 # All Build rule for target.
-CMakeFiles/MyExecutable.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/menna/Documents/sonnenBatterie/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 "Built target MyExecutable"
-.PHONY : CMakeFiles/MyExecutable.dir/all
+src/CMakeFiles/SonnenBatterieLib.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/SonnenBatterieLib.dir/build.make src/CMakeFiles/SonnenBatterieLib.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/SonnenBatterieLib.dir/build.make src/CMakeFiles/SonnenBatterieLib.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/menna/Documents/sonnenBatterie/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Built target SonnenBatterieLib"
+.PHONY : src/CMakeFiles/SonnenBatterieLib.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/MyExecutable.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/menna/Documents/sonnenBatterie/build/CMakeFiles 15
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/MyExecutable.dir/all
+src/CMakeFiles/SonnenBatterieLib.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/menna/Documents/sonnenBatterie/build/CMakeFiles 14
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/SonnenBatterieLib.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/menna/Documents/sonnenBatterie/build/CMakeFiles 0
-.PHONY : CMakeFiles/MyExecutable.dir/rule
+.PHONY : src/CMakeFiles/SonnenBatterieLib.dir/rule
 
 # Convenience name for target.
-MyExecutable: CMakeFiles/MyExecutable.dir/rule
-.PHONY : MyExecutable
+SonnenBatterieLib: src/CMakeFiles/SonnenBatterieLib.dir/rule
+.PHONY : SonnenBatterieLib
 
 # clean rule for target.
-CMakeFiles/MyExecutable.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyExecutable.dir/build.make CMakeFiles/MyExecutable.dir/clean
-.PHONY : CMakeFiles/MyExecutable.dir/clean
+src/CMakeFiles/SonnenBatterieLib.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/SonnenBatterieLib.dir/build.make src/CMakeFiles/SonnenBatterieLib.dir/clean
+.PHONY : src/CMakeFiles/SonnenBatterieLib.dir/clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/SonnenBatterie.dir
+
+# All Build rule for target.
+src/CMakeFiles/SonnenBatterie.dir/all: src/CMakeFiles/SonnenBatterieLib.dir/all
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/SonnenBatterie.dir/build.make src/CMakeFiles/SonnenBatterie.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/SonnenBatterie.dir/build.make src/CMakeFiles/SonnenBatterie.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/menna/Documents/sonnenBatterie/build/CMakeFiles --progress-num=1,2 "Built target SonnenBatterie"
+.PHONY : src/CMakeFiles/SonnenBatterie.dir/all
+
+# Build rule for subdir invocation for target.
+src/CMakeFiles/SonnenBatterie.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/menna/Documents/sonnenBatterie/build/CMakeFiles 16
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/SonnenBatterie.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/menna/Documents/sonnenBatterie/build/CMakeFiles 0
+.PHONY : src/CMakeFiles/SonnenBatterie.dir/rule
+
+# Convenience name for target.
+SonnenBatterie: src/CMakeFiles/SonnenBatterie.dir/rule
+.PHONY : SonnenBatterie
+
+# clean rule for target.
+src/CMakeFiles/SonnenBatterie.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/SonnenBatterie.dir/build.make src/CMakeFiles/SonnenBatterie.dir/clean
+.PHONY : src/CMakeFiles/SonnenBatterie.dir/clean
+
+#=============================================================================
+# Target rules for target tests/CMakeFiles/SonnenBatterieTests.dir
+
+# All Build rule for target.
+tests/CMakeFiles/SonnenBatterieTests.dir/all: src/CMakeFiles/SonnenBatterieLib.dir/all
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/SonnenBatterieTests.dir/build.make tests/CMakeFiles/SonnenBatterieTests.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/SonnenBatterieTests.dir/build.make tests/CMakeFiles/SonnenBatterieTests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/menna/Documents/sonnenBatterie/build/CMakeFiles --progress-num=17,18,19,20,21,22 "Built target SonnenBatterieTests"
+.PHONY : tests/CMakeFiles/SonnenBatterieTests.dir/all
+
+# Build rule for subdir invocation for target.
+tests/CMakeFiles/SonnenBatterieTests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/menna/Documents/sonnenBatterie/build/CMakeFiles 20
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/SonnenBatterieTests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/menna/Documents/sonnenBatterie/build/CMakeFiles 0
+.PHONY : tests/CMakeFiles/SonnenBatterieTests.dir/rule
+
+# Convenience name for target.
+SonnenBatterieTests: tests/CMakeFiles/SonnenBatterieTests.dir/rule
+.PHONY : SonnenBatterieTests
+
+# clean rule for target.
+tests/CMakeFiles/SonnenBatterieTests.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/SonnenBatterieTests.dir/build.make tests/CMakeFiles/SonnenBatterieTests.dir/clean
+.PHONY : tests/CMakeFiles/SonnenBatterieTests.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

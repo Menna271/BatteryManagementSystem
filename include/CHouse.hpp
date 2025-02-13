@@ -11,7 +11,7 @@ class CHouse : public IObservable
 public:
     CHouse() : m_Power(0.0), m_Voltage(230.0), m_Current(0.0), m_Freq(60.0) 
     {
-        setNotificationThreshold("power", 100.0);
+        setNotificationThreshold("house.power", 100.0);
     }
 
     void updateMeasurements(double power, double volt, double current, double freq);

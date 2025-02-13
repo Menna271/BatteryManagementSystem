@@ -1,3 +1,9 @@
-/home/menna/Documents/sonnenBatterie/build/CMakeFiles/MyExecutable.dir
 /home/menna/Documents/sonnenBatterie/build/CMakeFiles/edit_cache.dir
 /home/menna/Documents/sonnenBatterie/build/CMakeFiles/rebuild_cache.dir
+/home/menna/Documents/sonnenBatterie/build/src/CMakeFiles/SonnenBatterieLib.dir
+/home/menna/Documents/sonnenBatterie/build/src/CMakeFiles/SonnenBatterie.dir
+/home/menna/Documents/sonnenBatterie/build/src/CMakeFiles/edit_cache.dir
+/home/menna/Documents/sonnenBatterie/build/src/CMakeFiles/rebuild_cache.dir
+/home/menna/Documents/sonnenBatterie/build/tests/CMakeFiles/SonnenBatterieTests.dir
+/home/menna/Documents/sonnenBatterie/build/tests/CMakeFiles/edit_cache.dir
+/home/menna/Documents/sonnenBatterie/build/tests/CMakeFiles/rebuild_cache.dir

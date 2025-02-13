@@ -11,7 +11,7 @@ class CPVPanel : public IObservable
 public:
     CPVPanel() : m_Power(0.0), m_Voltage(230.0), m_Current(0.0) 
     {
-        setNotificationThreshold("power", 100.0);
+        setNotificationThreshold("pv.power", 100.0);
     }
 
     void updateMeasurements(double power, double volt, double current);

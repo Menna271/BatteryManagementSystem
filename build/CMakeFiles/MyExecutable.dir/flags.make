@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/menna/Documents/sonnenBatterie/include
 
-CXX_FLAGS = -std=gnu++17 -fsanitize=address,undefined -fno-omit-frame-pointer -fno-optimize-sibling-calls
+CXX_FLAGS = -std=gnu++17
 
