@@ -5,6 +5,7 @@ actor Main
 
 participant "CPVPanel" as CPV
 participant "CHouse" as House
+participant "CStorageSystem" as Storage
 participant "CEnergyContext" as EnergyContext
 participant "Controller\n(CVendorXControllerAdapter)" as Controller
 participant "SupplyFromPVStrategy" as PVStrategy
@@ -21,9 +22,25 @@ House -> EnergyContext: notifyObservers("power", power)
 EnergyContext -> EnergyContext: onUpdate(source, "power", value)
 EnergyContext -> Controller: notifyObservers("power", value)
 
+Main -> EnergyContext: setBatteryTemperature(temp)
+BatteryManager -> Storage: getMaxBatteryTemp()
+activate Storage
+Storage --> BatteryManager: maxTemp
+deactivate Storage
+alt (temp > threshold && m_Values["temp"] < threshold) || (temp < threshold && m_Values["temp"] > threshold)
+    EnergyContext -> Controller: notifyObservers("temp", value)
+    EnergyContext -> EnergyContext: update m_Values["temp"] = temp
+end
+
 Controller -> Controller: onUpdate(source, "power", value)
 Controller -> EnergyContext: getPVPower()
+activate EnergyContext
+EnergyContext --> Controller: pvPower
+deactivate EnergyContext
 Controller -> EnergyContext: getHouseConsumption()
+activate EnergyContext
+EnergyContext --> Controller: houseConsumption
+deactivate EnergyContext
 Controller -> Controller: determineStrategy(context)
 alt PV Power > House Consumption
     Controller -> PVStrategy: executeStrategy(context)
@@ -31,6 +48,13 @@ alt PV Power > House Consumption
 else
     Controller -> StorageStrategy: executeStrategy(context)
     StorageStrategy -> StorageStrategy: manageEnergy(context)
+end
+
+Controller -> Controller: onUpdate(source, "temp", value)
+alt (m_CoolerIsOn == true)
+    Controller-> Controller: deactivateCooler()
+else
+    Controller-> Controller: activateCooler()
 end
 
 @enduml

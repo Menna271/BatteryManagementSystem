@@ -2,7 +2,6 @@
 
 void CVendorABatteryAdapter::setVoltage(int index, double voltage) {
     m_VendorBattery.write_voltage(index, voltage);
-  //  checkVoltage(index, voltage);
 }
 
 void CVendorABatteryAdapter::setTemperature(double temp) {

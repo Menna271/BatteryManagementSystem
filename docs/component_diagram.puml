@@ -13,7 +13,7 @@ package "Energy Management System" {
     package "Notifications" {
         [IObservable]
         [IObserver]
-    }
+    } 
 
     package "Storage Components" {
         [IController]
@@ -51,6 +51,8 @@ package "Energy Management System" {
     [CStorageSystem] *-- [IInverter] : "owns"
     [CStorageSystem] *-- [IBattery] : "owns"
     [CStorageSystem] ..> [CStorageFactory] : "uses"
+
+    [CStorageFactory] ..> [CReadConfig] : "uses"
 
     [CVendorABatteryAdapter] ..> [CVendorABattery] : "uses"
     [CVendorABatteryAdapter] --|> [IBattery] : "implements"

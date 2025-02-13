@@ -7,6 +7,7 @@ class CEnergyContext {
     +getHouseConsumption(): double
     +requestCharge(power: double): void
     +requestDischarge(power: double): void
+    +setBatteryTemperature(temp: double): void
     +getMaxCharge(): double
     +getMaxDischarge(): double
     +isBatteryFull(): bool
@@ -17,7 +18,7 @@ class CEnergyContext {
     +removeObserver(obs: std::shared_ptr<IObserver>): void
     +notifyObservers(field: string, newValue: double): void
     --
-    - m_Values: std::unordered_map<string, double> = {{"pv.power", 0.0}, {"house.power", 0.0}}
+    - m_Values: std::unordered_map<string, double> = {{"batt.temp", 25.0}, {"pv.power", 0.0}, {"house.power", 0.0}}
     - m_Observers: std::vector<std::weak_ptr<IObserver>>
     - m_Storage: std::shared_ptr<CStorageSystem>
     - m_Grid: std::shared_ptr<CGrid>
@@ -102,6 +103,8 @@ class CStorageSystem {
     +isBatteryLow(): bool
     +Charge(power: double): void
     +Discharge(power: double): void
+    +setBatteryTemp(temp: double): void
+    +getMaxBatteryTemp(): double
     +getController(): std::shared_ptr<IController>
     --
     - m_Factory: CStorageFactory
@@ -125,11 +128,11 @@ class CVendorABattery {
     +read_voltage(index: int) : double
     +read_temperature(index: int) : double
     +read_max_power(index: int) : double
-    +read_max_temp(index: int) : double
+    +read_max_temp() : double
     +read_max_volt(index: int) : double
     +read_min_volt(index: int) : double
     +write_voltage(index: int, v: double) : void
-    +write_temperature(index: int, t: double) : void
+    +write_temperature(t: double) : void
     +are_batteries_full() : bool
     +are_batteries_low() : bool
     +calc_charge_capacity() : double
@@ -139,31 +142,30 @@ class CVendorABattery {
 }
 
 class "CVendorABattery::Battery" as Battery {
-    - voltage : double
-    - temp : double
-    - max_power : const double
-    - max_temp : const double
-    - max_voltage : const double
-    - min_voltage : const double
-    + Battery(v: double, t: double, mp: double, maxv: double, minv: double, maxt: double)
+    +voltage : double
+    +temp : double
+    +max_power : const double
+    +max_temp : const double
+    +max_voltage : const double
+    +min_voltage : const double
+    +Battery(v: double, t: double, mp: double, maxv: double, minv: double, maxt: double)
 }
 
 class CVendorABatteryAdapter {
     +CVendorABatteryAdapter(count: int)
     +setVoltage(index: int, voltage: double): void
-    +setTemperature(index: int, temp: double): void
-    +updateMeasurements(voltages: std::vector<double>, temps: std::vector<double>): void
-    +getNumberOfBatteries(): int
+    +setTemperature(temp: double): void
+    +getNumberOfBatteries() : int
     +getVoltage(index: int): double
     +getMaxPower(index: int): double
     +getTemperature(index: int): double
-    +getMaxTemperature(index: int): double
+    +getMaxTemperature() : double
     +getFullVoltage(index: int): double
     +getLowVoltage(index: int): double
-    +isBatteryLow(): bool
-    +isBatteryFull(): bool
-    +getBattChargeCapacity(): double
-    +getBattDischargeCapacity(): double
+    +isBatteryLow() : bool
+    +isBatteryFull() : bool
+    +getBattChargeCapacity() : double
+    +getBattDischargeCapacity() : double
     +charge(power: double): void
     +discharge(power: double): void
     --
@@ -219,9 +221,15 @@ class CVendorXController {
     +CVendorXController()
     +setEnergySource(context: IEnergyContext*): void
     +applyControlLogic(context: IEnergyContext*): void
+    +turn_cooler_on(): void
+    +turn_cooler_off(): void
+    +write_firmware_version(ver: string): void
+    +read_firmware_version(): string
+    +getCoolerState(): bool
     --
     - m_Strategy: std::unique_ptr<IEnergyStrategy>
     - m_FirmwareVersion: string
+    - m_isCoolerOn: bool
 }
 
 class CVendorXControllerAdapter {
@@ -229,19 +237,23 @@ class CVendorXControllerAdapter {
     +determineStrategy(context: IEnergyContext*): void
     +executeStrategy(context: IEnergyContext*): void
     +onUpdate(source: IObservable*, field: string, value: double): void
+    +activateCooler(): void
+    +deactivateCooler(): void
+    +determineCoolerState(): void
+    +setFirmwareVersion(ver: string): void
+    +getFirmwareVersion(): string
     --
     - m_ControllerX: CVendorXController
 }
 
 interface IBattery {
     +setVoltage(index: int, voltage: double): void
-    +setTemperature(index: int, temp: double): void
-    +updateMeasurements(voltages: std::vector<double>, temps: std::vector<double>): void
+    +setTemperature(temp: double): void
     +getNumberOfBatteries(): int
     +getVoltage(index: int): double
     +getMaxPower(index: int): double
     +getTemperature(index: int): double
-    +getMaxTemperature(index: int): double
+    +getMaxTemperature(): double
     +getFullVoltage(index: int): double
     +getLowVoltage(index: int): double
     +charge(power: double): void
@@ -255,6 +267,8 @@ interface IBattery {
 interface IController {
     +determineStrategy(context: IEnergyContext*): void
     +executeStrategy(context: IEnergyContext*): void
+    +activateCooler(): void
+    +deactivateCooler(): void
     +setFirmwareVersion(ver: string): void
     +getFirmwareVersion(): string
 }
@@ -268,6 +282,7 @@ interface IEnergyContext {
     +isBatteryLow() : bool
     +requestCharge(power: double) : void
     +requestDischarge(power: double) : void
+    +setBatteryTemperature(temp: double) : void
     +sellToGrid(power: double) : void
     +buyFromGrid(power: double) : void
 }
@@ -321,10 +336,10 @@ CStorageFactory ..> IInverter : returns
 CStorageFactory ..> IBattery : returns
 
 CStorageSystem --|> std::enable_shared_from_this<CStorageSystem>
-CStorageSystem *-- CStorageFactory
-CStorageSystem ..> IBattery : owns
-CStorageSystem ..> IInverter : owns
-CStorageSystem ..> IController : owns
+CStorageSystem ..> CStorageFactory : creates
+CStorageSystem ..> IBattery : uses
+CStorageSystem ..> IInverter : uses
+CStorageSystem ..> IController : uses
 
 CSupplyFromPVStrategy --|> IEnergyStrategy
 

@@ -22,13 +22,13 @@ double CEnergyContext::getHouseConsumption() const {
 
 void CEnergyContext::requestCharge(double power) {
     if (m_Storage) {
-        m_Storage->Charge(power); // Charge the batteries
+        m_Storage->Charge(power); 
     }
 }
 
 void CEnergyContext::requestDischarge(double power) {
     if (m_Storage) {
-        m_Storage->Discharge(power); // Discharge the batteries
+        m_Storage->Discharge(power); 
     }
 }
 
@@ -66,7 +66,7 @@ bool CEnergyContext::isBatteryLow() {
 
 void CEnergyContext::sellToGrid(double power) {
     if (m_Grid) {
-        m_Grid->sellPower(power); // Sell power to the grid
+        m_Grid->sellPower(power); 
     } else {
         throw std::runtime_error("storage not initialized in energy context");
     }
@@ -74,7 +74,7 @@ void CEnergyContext::sellToGrid(double power) {
 
 void CEnergyContext::buyFromGrid(double power) {
     if (m_Grid) {
-        m_Grid->buyPower(power); // Buy power from the grid
+        m_Grid->buyPower(power); 
     } else {
         throw std::runtime_error("storage not initialized in energy context");
     }

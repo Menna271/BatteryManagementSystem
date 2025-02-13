@@ -10,7 +10,6 @@ public:
     CVendorABatteryAdapter(int count)
         : m_VendorBattery(count) {}
 
-    // IBattery implementation
     void setVoltage(int index, double voltage) override;
     void setTemperature(double temp) override;
 
