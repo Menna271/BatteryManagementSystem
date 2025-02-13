@@ -1,0 +1,7 @@
+{
+    "controller_vendor": "VendorX",
+    "inverter_vendor": "VendorB",
+    "battery_vendor": "VendorA",
+    "storage_type": "Standard",
+    "number_of_modules": 3
+}

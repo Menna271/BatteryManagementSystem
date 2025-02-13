@@ -1,0 +1,45 @@
+@startuml
+
+package "Energy Management System" {
+    [CEnergyContext] --> [CGrid]
+    [CEnergyContext] --> [CStorageSystem]
+    [CEnergyContext] --> [CHouse]
+    [CEnergyContext] --> [CPVPanel]
+    
+    [CStorageFactory] --> [CStorageSystem]
+    [CStorageFactory] --> [IController]
+    [CStorageFactory] --> [IEnergyContext]
+    [CStorageFactory] --> [CReadConfig]
+    
+    [CStorageSystem] --> [IEnergyContext]
+    [CStorageSystem] --> [IController]
+    [CStorageSystem] --> [IInverter]
+    [CStorageSystem] --> [IBattery]
+    [CStorageSystem] --> [CStorageFactory]
+    
+    [CSupplyFromPVStrategy] --> [IEnergyStrategy]
+    [CSupplyFromPVStrategy] --> [IEnergyContext]
+    
+    [CSupplyFromStorageStrategy] --> [IEnergyStrategy]
+    [CSupplyFromStorageStrategy] --> [IEnergyContext]
+    
+    package "Vendor Components" {
+        [CVendorABatteryAdapter] --> [IBattery]
+        [CVendorABatteryAdapter] --> [CVendorABattery]
+        
+        [CVendorBInverterAdapter] --> [IInverter]
+        [CVendorBInverterAdapter] --> [CVendorBInverter]
+        
+        [CVendorXControllerAdapter] --> [IController]
+        [CVendorXControllerAdapter] --> [CVendorXController]
+    }
+    
+    package "Observer Pattern" {
+        [IObservable] --> [IObserver] : "Notifies"
+        [IObserver] --> [IObservable] : "Observes"
+        [IEnergyContext] --> [IObservable]
+        [IController] --> [IObserver]
+    }
+}
+
+@enduml
