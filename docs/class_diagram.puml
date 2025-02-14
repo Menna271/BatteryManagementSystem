@@ -315,14 +315,19 @@ interface IObserver {
     +onUpdate(source: IObservable*, field: string, value: double): void
 }
 
-CReadConfig ..> "from_json(json, CReadConfig&)" : depends 
+CReadConfig ..> "nlohmann::json" : depends 
 
 CPVPanel --|> IObservable : implemets
+CPVPanel ..> IObserver : weak ref
 
 CHouse --|> IObservable : implemets
+CHouse ..> IObserver : weak ref
+
+IObservable --> IObserver : notifies
 
 CEnergyContext --|> IEnergyContext
 CEnergyContext --|> IObserver
+CEnergyContext ..> IObserver : weak ref
 CEnergyContext o-- CStorageSystem : shares
 CEnergyContext o-- CGrid : shares
 
@@ -353,7 +358,7 @@ CVendorBInverter *-- Inverter : contains
 CVendorBInverterAdapter --|> IInverter : implemets
 CVendorBInverterAdapter *-- CVendorBInverter : contains
 
-CVendorXController ..> IEnergyContext : uses
+CVendorXController ..> IEnergyContext : depends
 CVendorXController *-- IEnergyStrategy : owns (unique)
 
 CVendorXControllerAdapter --|> IController : implemets

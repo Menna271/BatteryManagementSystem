@@ -40,22 +40,28 @@ package "Energy Management System" {
 
     [CEnergyContext] o-- [CStorageSystem] : shares
     [CEnergyContext] o-- [CGrid] : shares
-    
+
     [CPVPanel] --|> [IObservable] : "implements"
     [CHouse] --|> [IObservable] : "implements"
+
+    [CPVPanel] ..> [IObserver] : "weak ref"
+    [CHouse] ..> [IObserver] : "weak ref"
 
     [IObservable] --> [IObserver] : "notifies"
 
     [CEnergyContext] --|> [IEnergyContext] : "implements"
     [IEnergyContext] --|> [IObservable] : "inherits"
     [CEnergyContext] --|> [IObserver] : "implements"
+    [CEnergyContext] ..> [IObserver] : "weak ref"
 
     [CStorageSystem] *-- [IController] : "owns"
     [CStorageSystem] *-- [IInverter] : "owns"
     [CStorageSystem] *-- [IBattery] : "owns"
-    [CStorageSystem] ..> [CStorageFactory] : "uses"
+    [CStorageSystem] *-- [CStorageFactory] : "contains"
 
     [CStorageFactory] *-- [CReadConfig] : "contains"
+
+    [CReadConfig] ..> "nlohmann::json" : depends 
 
     [CVendorABatteryAdapter] *-- [CVendorABattery] : "contains"
     [CVendorABatteryAdapter] --|> [IBattery] : "implements"
@@ -65,6 +71,7 @@ package "Energy Management System" {
 
     [CVendorXControllerAdapter] *-- [CVendorXController] : "contains"
     [CVendorXControllerAdapter] --|> [IController] : "implements"
+    [CVendorXControllerAdapter] ..> [IEnergyContext] : "depends"
 
     [CSupplyFromPVStrategy] --|> [IEnergyStrategy] : "implements"
     [CSupplyFromStorageStrategy] --|> [IEnergyStrategy] : "implements"
