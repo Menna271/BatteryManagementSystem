@@ -60,6 +60,12 @@ package "Energy Management System" {
     [CStorageSystem] *-- [CStorageFactory] : "contains"
 
     [CStorageFactory] *-- [CReadConfig] : "contains"
+    [CStorageFactory] ..> [CVendorABatteryAdapter] : creates
+    [CStorageFactory] ..> [CVendorBInverterAdapter] : creates
+    [CStorageFactory] ..> [CVendorXControllerAdapter] : creates
+    [CStorageFactory] ..> [IController] : returns
+    [CStorageFactory] ..> IInverter : returns
+    [CStorageFactory] ..> [IBattery] : returns
 
     [CReadConfig] ..> "nlohmann::json" : depends 
 
