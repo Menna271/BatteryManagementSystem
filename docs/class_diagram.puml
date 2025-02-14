@@ -315,19 +315,18 @@ interface IObserver {
     +onUpdate(source: IObservable*, field: string, value: double): void
 }
 
-' External function for JSON deserialization
-CReadConfig ..> "from_json(json, CReadConfig&)" : from_json
+CReadConfig ..> "from_json(json, CReadConfig&)" : depends 
 
-CPVPanel --|> IObservable
+CPVPanel --|> IObservable : implemets
 
-CHouse --|> IObservable
+CHouse --|> IObservable : implemets
 
 CEnergyContext --|> IEnergyContext
 CEnergyContext --|> IObserver
-CEnergyContext --> CStorageSystem
-CEnergyContext --> CGrid
+CEnergyContext o-- CStorageSystem : shares
+CEnergyContext o-- CGrid : shares
 
-CStorageFactory *-- CReadConfig
+CStorageFactory *-- CReadConfig : contains
 CStorageFactory ..> CVendorABatteryAdapter : creates
 CStorageFactory ..> CVendorBInverterAdapter : creates
 CStorageFactory ..> CVendorXControllerAdapter : creates
@@ -335,34 +334,33 @@ CStorageFactory ..> IController : returns
 CStorageFactory ..> IInverter : returns
 CStorageFactory ..> IBattery : returns
 
-CStorageSystem --|> std::enable_shared_from_this<CStorageSystem>
-CStorageSystem ..> CStorageFactory : creates
-CStorageSystem ..> IBattery : uses
-CStorageSystem ..> IInverter : uses
-CStorageSystem ..> IController : uses
+CStorageSystem *-- CStorageFactory : contains
+CStorageSystem *-- IBattery : owns (unique)
+CStorageSystem *-- IInverter : owns (unique)
+CStorageSystem *-- IController : shares (ref count 1)
 
-CSupplyFromPVStrategy --|> IEnergyStrategy
+CSupplyFromPVStrategy --|> IEnergyStrategy : implemets
 
-CSupplyFromStorageStrategy --|> IEnergyStrategy
+CSupplyFromStorageStrategy --|> IEnergyStrategy : implemets
 
 CVendorABattery "1" *-- "0..*" Battery : contains
 
-CVendorABatteryAdapter --|> IBattery
-CVendorABatteryAdapter *-- CVendorABattery : uses
+CVendorABatteryAdapter --|> IBattery : implemets
+CVendorABatteryAdapter *-- CVendorABattery : contains
 
 CVendorBInverter *-- Inverter : contains
 
-CVendorBInverterAdapter --|> IInverter
-CVendorBInverterAdapter *-- CVendorBInverter : uses
+CVendorBInverterAdapter --|> IInverter : implemets
+CVendorBInverterAdapter *-- CVendorBInverter : contains
 
 CVendorXController ..> IEnergyContext : uses
-CVendorXController ..> IEnergyStrategy : holds
+CVendorXController *-- IEnergyStrategy : owns (unique)
 
-CVendorXControllerAdapter --|> IController
+CVendorXControllerAdapter --|> IController : implemets
 CVendorXControllerAdapter *-- CVendorXController : uses
 
-IController --|> IObserver
+IController --|> IObserver : implemets
 
-IEnergyContext --|> IObservable
+IEnergyContext --|> IObservable : inherits
 
 @enduml

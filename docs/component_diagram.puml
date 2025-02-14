@@ -38,6 +38,9 @@ package "Energy Management System" {
         [CSupplyFromStorageStrategy]
     }
 
+    [CEnergyContext] o-- [CStorageSystem] : shares
+    [CEnergyContext] o-- [CGrid] : shares
+    
     [CPVPanel] --|> [IObservable] : "implements"
     [CHouse] --|> [IObservable] : "implements"
 
@@ -52,15 +55,15 @@ package "Energy Management System" {
     [CStorageSystem] *-- [IBattery] : "owns"
     [CStorageSystem] ..> [CStorageFactory] : "uses"
 
-    [CStorageFactory] ..> [CReadConfig] : "uses"
+    [CStorageFactory] *-- [CReadConfig] : "contains"
 
-    [CVendorABatteryAdapter] ..> [CVendorABattery] : "uses"
+    [CVendorABatteryAdapter] *-- [CVendorABattery] : "contains"
     [CVendorABatteryAdapter] --|> [IBattery] : "implements"
 
-    [CVendorBInverterAdapter] ..> [CVendorBInverter] : "uses"
+    [CVendorBInverterAdapter] *-- [CVendorBInverter] : "contains"
     [CVendorBInverterAdapter] --|> [IInverter] : "implements"
 
-    [CVendorXControllerAdapter] ..> [CVendorXController] : "uses"
+    [CVendorXControllerAdapter] *-- [CVendorXController] : "contains"
     [CVendorXControllerAdapter] --|> [IController] : "implements"
 
     [CSupplyFromPVStrategy] --|> [IEnergyStrategy] : "implements"
